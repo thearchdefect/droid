@@ -10,7 +10,7 @@
   
     <groupId>uk.gov.nationalarchives</groupId>
     <artifactId>droid-parent</artifactId>
-    <version>6.1.3-SNAPSHOT</version>
+    <version>6.1.3</version>
     <packaging>pom</packaging>
   
     <name>droid-parent</name>
@@ -24,6 +24,9 @@
     </organization>
     
     <developers>
+        <developer>
+            <name>Graham Seaman</name>
+        </developer>
         <developer>
             <name>Ross Spencer</name>
         </developer>
@@ -350,8 +353,8 @@
                         <link>${project.organization.url}</link>
                     </links>
                     <packagesheader>DROID Packages</packagesheader>
-                    <doctitle>DROID 6.2-SNAPSHOT</doctitle>
-                    <windowtitle>DROID 6.2-SNAPSHOT</windowtitle>
+                    <doctitle>DROID 6.1.3</doctitle>
+                    <windowtitle>DROID 6.1.3</windowtitle>
                     <bottom>
                         <![CDATA[
                             Copyright &copy; ${project.inceptionYear}-{currentYear} <a href="${project.organization.url}">${project.organization.name}</a>. All Rights Reserved
