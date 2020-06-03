@@ -31,9 +31,11 @@
  */
 package uk.gov.nationalarchives.droid.core.interfaces.archive;
 
-import org.apache.ant.compress.util.SevenZStreamFactory;
+//import org.apache.ant.compress.util.SevenZStreamFactory;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
+import org.apache.commons.compress.archivers.ArchiveStreamFactory;
+import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.junit.Test;
 import uk.gov.nationalarchives.droid.core.interfaces.IdentificationRequest;
 import uk.gov.nationalarchives.droid.core.interfaces.ResourceId;
@@ -43,6 +45,7 @@ import uk.gov.nationalarchives.droid.core.interfaces.ResultHandler;
 import uk.gov.nationalarchives.droid.core.interfaces.IdentificationResult;
 import uk.gov.nationalarchives.droid.core.interfaces.resource.RequestMetaData;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -67,14 +70,21 @@ public class SevenZArchiveHandlerTest {
         IdentificationRequestFactory factory = mock(IdentificationRequestFactory.class);
 
         List<IdentificationRequest> mockRequests = new ArrayList<>();
-        SevenZStreamFactory sevenZStreamFactory = new SevenZStreamFactory();
-        ArchiveInputStream archiveInputStream = sevenZStreamFactory.getArchiveInputStream(file.toFile(), null);
+
+//        final InputStream inputStream = Files.newInputStream(file);
+//        ArchiveInputStream archiveInputStream =
+//                new ArchiveStreamFactory().createArchiveInputStream(ArchiveStreamFactory.SEVEN_Z, inputStream);
+
+//        SevenZStreamFactory sevenZStreamFactory = new SevenZStreamFactory();
+//        ArchiveInputStream archiveInputStream = sevenZStreamFactory.getArchiveInputStream(file.toFile(), null);
+
+        SevenZFile sevenZFile = new SevenZFile(file.toFile());
 
         ArchiveEntry entry;
         ResourceId expectedParentId = new ResourceId(30L, "");
 
         int count = 0;
-        while ((entry = archiveInputStream.getNextEntry()) != null) {
+        while ((entry = sevenZFile.getNextEntry()) != null) {
             URI expectedUri = ArchiveFileUtils.toSevenZUri(file.toUri(), entry.getName());
             IdentificationRequest mockRequest = mock(IdentificationRequest.class);
             

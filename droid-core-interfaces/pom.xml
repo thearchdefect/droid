@@ -50,6 +50,27 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <!-- org.tukaani.xz needed by commons-compress. -->
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>analyze</id>
+                        <goals>
+                            <goal>analyze-only</goal>
+                        </goals>
+                        <configuration>
+                            <failOnWarning>true</failOnWarning>
+                            <!-- ignore annotations for "unused but declared" warnings -->
+                            <ignoredUnusedDeclaredDependencies>
+                                <ignoredUnusedDeclaredDependency>org.tukaani:xz:jar:1.8</ignoredUnusedDeclaredDependency>
+                                <ignoredUnusedDeclaredDependency>org.apache.logging.log4j:log4j-slf4j-impl:jar:2.13.3</ignoredUnusedDeclaredDependency>
+                                <ignoredUnusedDeclaredDependency>org.bouncycastle:bcprov-jdk15on:jar:1.65.01</ignoredUnusedDeclaredDependency>
+                            </ignoredUnusedDeclaredDependencies>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -145,7 +166,14 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
+        <!-- the following dependency is needed by commons-compress for 7ZipFile -->
         <dependency>
+            <groupId>org.tukaani</groupId>
+            <artifactId>xz</artifactId>
+            <version>1.8</version>
+            <scope>test</scope>
+        </dependency>
+        <!--dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant-compress</artifactId>
             <exclusions>
@@ -154,7 +182,7 @@
                     <artifactId>tools</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>com.github.junrar</groupId>
             <artifactId>junrar</artifactId>
